@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>jQuery自由拖拽排序案例</title>
+  <style>
+    body{  font-family: "Helvetica Neue",Helvetica,"Microsoft YaHei",Arial,sans-serif; background: #f9f9f9; color: #4E546B; margin:0; padding:0; }
+    ul,ol,li{ list-style:none; }
+    .container{ text-align: center; }
+    .container .th{ color: #f00; font-size: 30px; text-align: center; }
+    .container .sort-com{ width:auto; height:auto; text-align: center;}
+    .container .sort-com .sort-list{ width:100%;  -webkit-user-select: none; -moz-user-select: none;
+      -ms-user-select: none;  user-select: none;}
+    .container .sort-com .sort-list .item{ width: 200px;height: 200px; background: white;  border: 1px solid #ccc; display: inline-block; line-height: 200px; text-align: center; margin: 10px; color: #333; font-size: 30px; cursor: default; }
+    .container .sort-com.sorting .sort-list .item{ cursor: move;}
+    .container .btn{ width: 100px; height: 40px; background-color: #525252; color: #fff; cursor: pointer; border:none; outline:none; margin-top: 30px; font-size:16px;}
+    .container .sort-com.sorting .btn{ background-color:#f73d3d; }
+  </style>
+</head>
+<body>
+
+<section class="container">
+  <h4 class="th">jQuery自由拖拽排序案例</h4>
+  <div class='sort-com' id="jsSortCom">
+    <ul class="sort-list">
+        <li class="item jsDrag">模块A</li>
+        <li class="item jsDrag">模块B</li>
+        <li class="item jsDrag">模块C</li>
+        <li class="item jsDrag">模块D</li>
+    </ul>
+    <button class="btn" id="jsSortBtn" data-title1='点击排序' data-title2='完成'>点击排序</button>
+  </div>
+</section>
+
+<script type="text/javascript" src="http://jquery.cuishifeng.cn/js/jquery-3.2.1_b5dbe7b.js"></script>
+<script type="text/javascript" src="js/drag-arrange.js"></script>
+<script type="text/javascript">
+ //拖拽排序函数
+   const myDrag = {
+       //执行拖拽
+       dragMove(dom) {
+           $(dom).arrangeable();
+           //成功后的回调
+           $(dom).parent().on('drag.end.arrangeable', function(event,$element){
+               console.log('trigger',$element);
+           });
+       },
+       //摧毁拖拽
+       dragDestory(dom) {
+           var jsDragArr = Array.prototype.slice.call($(dom));
+           for (var i = 0; i < jsDragArr.length; i++) {
+               var destroy = $(jsDragArr[i]).data('drag-arrange-destroy');
+               if (destroy) {
+                   destroy();
+                   break;
+               }
+           }
+       },
+       //点击排序按钮
+       dragSortClick() {
+            var bl = true;
+           $(document).on('click','#jsSortBtn',function () {
+               var $that = $(this), s = 'show';
+               var newDrag = Object.create(myDrag);
+                function fn1(){
+                    $that.text($that.data('title2'));
+                    $('#jsSortCom').addClass('sorting');
+                    newDrag.dragMove('.jsDrag');
+               }
+               function fn2(){
+                    $that.text($that.data('title1'));
+                    $('#jsSortCom').removeClass('sorting');
+                    newDrag.dragDestory('.jsDrag');
+               }
+               bl ? fn1() : fn2();
+               bl = !bl;
+           })
+       }
+   }
+
+    myDrag.dragSortClick();
+
+</script>
+</body>
+</html>
+
