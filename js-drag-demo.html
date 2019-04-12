@@ -2,16 +2,31 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>jQuery自由拖拽排序案例</title>
+  <title>js-jq自由拖拽排序案例</title>
   <style>
     body{  font-family: "Helvetica Neue",Helvetica,"Microsoft YaHei",Arial,sans-serif; background: #f9f9f9; color: #4E546B; margin:0; padding:0; }
-    ul,ol,li{ list-style:none; }
-    .container{ text-align: center; }
+    ul,ol,li{ list-style:none; margin:0; padding:0; }
+    .container{ width:740px; margin: 0 auto; text-align: center; }
     .container .th{ color: #f00; font-size: 30px; text-align: center; }
     .container .sort-com{ width:auto; height:auto; text-align: center;}
-    .container .sort-com .sort-list{ width:100%;  -webkit-user-select: none; -moz-user-select: none;
-      -ms-user-select: none;  user-select: none;}
-    .container .sort-com .sort-list .item{ width: 200px;height: 200px; background: white;  border: 1px solid #ccc; display: inline-block; line-height: 200px; text-align: center; margin: 10px; color: #333; font-size: 30px; cursor: default; }
+    .container .sort-com .sort-list{ width:100%; overflow:hidden;  -webkit-user-select: none; -moz-user-select: none;
+      -ms-user-select: none;  user-select: none; }
+    .container .sort-com .sort-list .item{ width: 100px; height: 100px; line-height: 100px;  background-color: white; border: 1px solid #ccc; display: inline-block; text-align: center; margin: 10px; color: #333; font-size: 20px; float: left;
+        cursor: default; }
+    .container .sort-com .sort-list .item:first-of-type{ background-color:pink;}
+    .container .sort-com .sort-list .item:nth-of-type(2){ background-color:#f97a90;}
+    .container .sort-com .sort-list .item:nth-of-type(3){ background-color:#ffdcc0;}
+    .container .sort-com .sort-list .item:nth-of-type(4){ background-color:#c0ceff;}
+    .container .sort-com .sort-list .item:nth-of-type(5){ background-color:#68bcff;}
+    .container .sort-com .sort-list .item:nth-of-type(6){ background-color:#ff5f51;}
+    .container .sort-com .sort-list .item:nth-of-type(7){ background-color:#fd9a92;}
+    .container .sort-com .sort-list .item:nth-of-type(8){ background-color:#6bc56f;}
+    .container .sort-com .sort-list .item:nth-of-type(9){ background-color:#12c9e0;}
+    .container .sort-com .sort-list .item:nth-of-type(10){ background-color:#fdf290;}
+    .container .sort-com .sort-list .item:nth-of-type(11){ background-color:#f19fbb;}
+    .container .sort-com .sort-list .item:nth-of-type(12){ background-color:#dad8d8;}
+
+
     .container .sort-com.sorting .sort-list .item{ cursor: move;}
     .container .btn{ width: 100px; height: 40px; background-color: #525252; color: #fff; cursor: pointer; border:none; outline:none; margin-top: 30px; font-size:16px;}
     .container .sort-com.sorting .btn{ background-color:#f73d3d; }
@@ -20,13 +35,21 @@
 <body>
 
 <section class="container">
-  <h4 class="th">jQuery自由拖拽排序案例</h4>
+  <h4 class="th">js-jq自由拖拽排序案例</h4>
   <div class='sort-com' id="jsSortCom">
     <ul class="sort-list">
         <li class="item jsDrag">模块A</li>
         <li class="item jsDrag">模块B</li>
         <li class="item jsDrag">模块C</li>
         <li class="item jsDrag">模块D</li>
+        <li class="item jsDrag">模块E</li>
+        <li class="item jsDrag">模块F</li>
+        <li class="item jsDrag">模块G</li>
+        <li class="item jsDrag">模块H</li>
+        <li class="item jsDrag">模块I</li>
+        <li class="item jsDrag">模块J</li>
+        <li class="item jsDrag">模块K</li>
+        <li class="item jsDrag">模块L</li>
     </ul>
     <button class="btn" id="jsSortBtn" data-title1='点击排序' data-title2='完成'>点击排序</button>
   </div>
